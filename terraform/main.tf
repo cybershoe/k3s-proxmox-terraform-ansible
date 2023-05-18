@@ -7,6 +7,7 @@ resource "proxmox_vm_qemu" "proxmox_vm_master" {
   agent       = 1
   memory      = var.num_k3s_masters_mem
   cores       = 4
+  scsihw      = "virtio-scsi-pci"
 
   ipconfig0 = "ip=${var.master_ips[count.index]}/${var.networkrange},gw=${var.gateway}"
 
@@ -30,6 +31,7 @@ resource "proxmox_vm_qemu" "proxmox_vm_workers" {
   agent       = 1
   memory      = var.num_k3s_nodes_mem
   cores       = 4
+  scsihw      = "virtio-scsi-pci"
 
   ipconfig0 = "ip=${var.worker_ips[count.index]}/${var.networkrange},gw=${var.gateway}"
 
